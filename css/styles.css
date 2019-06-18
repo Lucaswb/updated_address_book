@@ -1,7 +1,53 @@
+body {
+  font-family: serif;
+background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+}
+
+label,{
+  color: white;
+}
 
 #show-contact {
   display: none;
 }
 .hide {
   display: none;
+}
+
+.jumbotron {
+  text-align: center;
+
+}
+
+/* #show-contact {
+  background-color: #aaa;
+  border-radius: 10px;
+}
+
+#show-contact #button {
+  margin-left: 20px;
+  margin-bottom: 20px;
+} */
+ #right {
+   margin-top: 20px;
+   background-color: orange;
+   border-radius: 15px;
+   border-style: solid;
+   border-width: 3px;
+   border-color: white;
+ }
+ #left {
+   margin-top: 20px;
+   background-color: skyblue;
+   border-radius: 15px;
+   border-style: solid;
+   border-width: 3px;
+   border-color: white;
+   margin-left: 20
+
+ }
+
+#buttons button{
+  margin-left: 5px;
+  margin-bottom: 5px;
 }

@@ -9,8 +9,10 @@
 </head>
 <body>
   <div class="container">
+    <div class="jumbotron">
     <h1>Address Book</h1>
-    <h2>Add a Contact:</h2>
+    <h3>Add a Contact:</h>
+  </div>
     <form id="new-contact">
       <div class="form-group">
         <label for="new-first-name">First Name</label>
@@ -35,17 +37,26 @@
       <button type="submit">Add</button>
 
     </form>
+    <div class="row">
+      <div class="col-md-5" id= "right">
+        <h2>Contacts:</h2>
+        <ul id="contacts">
+        </ul>
+      </div>
+      <div class="col-md-2" id= "center">
+      </div>
+      <div class="col-md-5" id="left">
+        <h2>Information:</h2>
+        <div id="show-contact">
+          <p>First Name: <span class="first-name"></span></p>
+          <p>Last Name: <span class="last-name"></span></p>
+          <p>Phone Number: <span class="phone-number"></span></p>
+          <p id = "physical">Physical Address: <span class="physical-address"></span></p>
+          <p id ="email">Email Address: <span class="email-address"></span></p>
+          <div id="buttons">
+          </div>
+        </div>
 
-    <h2>Contacts:</h2>
-    <ul id="contacts">
-    </ul>
-    <div id="show-contact">
-      <p>First Name: <span class="first-name"></span></p>
-      <p>Last Name: <span class="last-name"></span></p>
-      <p>Phone Number: <span class="phone-number"></span></p>
-      <p id = "physical">Physical Address: <span class="physical-address"></span></p>
-      <p id ="email">Email Address: <span class="email-address"></span></p>
-      <div id="buttons">
       </div>
     </div>
   </div>

@@ -187,9 +187,9 @@ Contact.prototype.getPhysicalAddress = function() {
 
    var buttons = $("#buttons");
    buttons.empty();
-   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>"+"<br>")
-   buttons.append("<button class='updateEmailButton' id=" + contact.id + ">Update email address</button>"+"<br>")
-   buttons.append("<button class='updatePhysicalAddressButton' id=" + contact.id + ">Update physical address</button>"+"<br>")
+   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>")
+   buttons.append("<button class='updateEmailButton' id=" + contact.id + ">add email</button>")
+   buttons.append("<button class='updatePhysicalAddressButton' id=" + contact.id + ">add address</button>")
 
  }
 
