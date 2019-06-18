@@ -108,6 +108,7 @@ Contact.prototype.getPhysicalAddress = function() {
  function attachContactListeners() {
    var  currentContact;
    $("ul#contacts").on("click", "li", function() {
+     $("#left").fadeIn(2000);
      currentContact = this.id;
      showContact(currentContact);
    });
@@ -206,16 +207,16 @@ Contact.prototype.getPhysicalAddress = function() {
 $(function(){
   attachContactListeners();
   //this is for debugging
-  var inputtedFirstName = "Sam"
-  var inputtedLastName = "Smith"
-  var inputtedPhoneNumber = "12345"
-  var inputtedEmailAddress = "hello1@gmail.com"
-  var inputtedPhysicalAddress = "632 main st."
-  var newContact1 = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
-  newContact1.addPhysicalAddress(inputtedPhysicalAddress);
-  newContact1.addEmailAddress(inputtedEmailAddress);
-  addressBook.addContact(newContact1);
-  displayContactDetails(addressBook);
+  // var inputtedFirstName = "Sam"
+  // var inputtedLastName = "Smith"
+  // var inputtedPhoneNumber = "12345"
+  // var inputtedEmailAddress = "hello1@gmail.com"
+  // var inputtedPhysicalAddress = "632 main st."
+  // var newContact1 = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+  // newContact1.addPhysicalAddress(inputtedPhysicalAddress);
+  // newContact1.addEmailAddress(inputtedEmailAddress);
+  // addressBook.addContact(newContact1);
+  // displayContactDetails(addressBook);
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
     var inputtedFirstName = $("input#new-first-name").val();
@@ -224,12 +225,15 @@ $(function(){
     var inputtedEmailAddress = $("input#new-email-address").val();
     var inputtedPhysicalAddress = $("input#new-physical-address").val();
     if (inputtedFirstName||inputtedLastName){
+      $("#right").fadeIn(2000);
+
       var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
       newContact.addPhysicalAddress(inputtedPhysicalAddress);
       newContact.addEmailAddress(inputtedEmailAddress);
       addressBook.addContact(newContact);
       displayContactDetails(addressBook);
       $("form#new-contact")[0].reset();
+
     } else {
       alert("please enter information");
     }
