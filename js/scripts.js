@@ -76,22 +76,24 @@ Contact.prototype.fullName = function() {
 Contact.prototype.getEmailAddress = function() {
   if (this.addressObject.emailAddress.length>0){
     var string = "<ul>";
-    this.addressObject.emailAddress.forEach(function(email) {
-      string += "<li>"+ email +"</li>";
-    });
+
+  for (var i = 0; i < this.addressObject.emailAddress.length; i++) {
+    string += "<li id ="+i+">"+ this.addressObject.emailAddress[i] +"</li>";
+  }
     return string+="</ul>";
+
   } else {
     return false;
   }
-
 }
 
 Contact.prototype.getPhysicalAddress = function() {
   if (this.addressObject.physicalAddress.length>0){
     var string = "<ul>";
-    this.addressObject.physicalAddress.forEach(function(physical) {
-      string += "<li>"+ physical +"</li>";
-    });
+
+  for (var i = 0; i < this.addressObject.physicalAddress.length; i++) {
+    string += "<li id ="+i+">"+ this.addressObject.physicalAddress[i] +"</li>";
+  }
     return string+="</ul>";
 
   } else {
@@ -100,26 +102,62 @@ Contact.prototype.getPhysicalAddress = function() {
 }
 
 
-
- // var contact1 = new Contact("Bill", "Clinton", 12345)
- // console.log(contact1);
- //
- // contact1.addEmailAddress("hello@gmail.com")
- // contact1.addEmailAddress("hello2@gmail.com")
- // contact1.addEmailAddress("hello3@gmail.com")
- // contact1.addPhysicalAddress("1600 Pennsylvania Ave")
- // contact1.addPhysicalAddress("1700 Pennsylvania Ave")
- //
- // console.log(contact1.getEmailAddress())
- // console.log(contact1.getPhysicalAddress())
-
-
  var addressBook = new AddressBook();
 
+
  function attachContactListeners() {
+   var  currentContact;
    $("ul#contacts").on("click", "li", function() {
+     currentContact = this.id;
+     showContact(currentContact);
+   });
+
+   $("#physical").on("click", "li", function() {
+     var currentId = $(this).attr('id');
+       var contact = addressBook.findContact(currentContact);
+       // alert(currentId);
+       var array = contact.addressObject.physicalAddress;
+       var answer = prompt("enter yes if you wish to delete this physical address")
+       if (answer=="yes"){
+         array.splice(currentId,1);
+
+       } else {
+         alert("nothing was deleted");
+       }
+       showContact(currentContact);
+   });
+
+
+   $("#email").on("click", "li", function() {
+     var currentId = $(this).attr('id');
+       var contact = addressBook.findContact(currentContact);
+       var array = contact.addressObject.emailAddress;
+       var answer = prompt("enter yes if you wish to delete this email address")
+       if (answer=="yes"){
+         array.splice(currentId,1);
+
+       } else {
+         alert("nothing was deleted");
+       }
+       showContact(currentContact);
+   });
+
+   $("#buttons").on("click", ".updateEmailButton", function() {
+    var newEmail = prompt("Please enter updated email address");
+    var contact = addressBook.findContact(this.id);
+    contact.addEmailAddress(newEmail);
+
+    $("p#email").removeClass("hide");
      showContact(this.id);
    });
+   $("#buttons").on("click", ".updatePhysicalAddressButton", function() {
+    var newAddress = prompt("Please enter updated physical address address");
+    var contact = addressBook.findContact(this.id);
+    contact.addPhysicalAddress(newAddress);
+     $("p#physical").removeClass("hide");
+      showContact(this.id);
+   });
+
    $("#buttons").on("click", ".deleteButton", function() {
      addressBook.deleteContact(this.id);
      $("#show-contact").hide();
@@ -149,7 +187,9 @@ Contact.prototype.getPhysicalAddress = function() {
 
    var buttons = $("#buttons");
    buttons.empty();
-   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>")
+   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>"+"<br>")
+   buttons.append("<button class='updateEmailButton' id=" + contact.id + ">Update email address</button>"+"<br>")
+   buttons.append("<button class='updatePhysicalAddressButton' id=" + contact.id + ">Update physical address</button>"+"<br>")
 
  }
 
@@ -165,6 +205,17 @@ Contact.prototype.getPhysicalAddress = function() {
 
 $(function(){
   attachContactListeners();
+  //this is for debugging
+  var inputtedFirstName = "Sam"
+  var inputtedLastName = "Smith"
+  var inputtedPhoneNumber = "12345"
+  var inputtedEmailAddress = "hello1@gmail.com"
+  var inputtedPhysicalAddress = "632 main st."
+  var newContact1 = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+  newContact1.addPhysicalAddress(inputtedPhysicalAddress);
+  newContact1.addEmailAddress(inputtedEmailAddress);
+  addressBook.addContact(newContact1);
+  displayContactDetails(addressBook);
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
     var inputtedFirstName = $("input#new-first-name").val();
